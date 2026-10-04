@@ -16,26 +16,26 @@ img { max-width: 100%; }
 [hidden] { display: none !important; }
 /* Layout: one column, header → 技能地圖表 → 工作原則 → 專案逐列（左：名稱與技術，右：痛點／做法／成果） */
 :root {
-  --bg: #F2F4F3;
-  --surface: #FFFFFF;
-  --fg: #15201D;
-  --muted: #56635F;
-  --line: #D5DCD9;
-  --accent: #2346C4;
-  --accent-soft: #E3E8FA;
+  --bg: #FBF7EE;
+  --surface: #FFFDF7;
+  --fg: #3B2A1E;
+  --muted: #76604F;
+  --line: #E5D8C3;
+  --accent: #A84A0C;
+  --accent-soft: #F5E3CF;
   --font-display: "Bricolage Grotesque", "Noto Sans TC", system-ui, sans-serif;
   --font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0F1513; --surface: #161E1B; --fg: #E3EAE7; --muted: #9AA8A3;
-    --line: #2A3532; --accent: #8EA8FF; --accent-soft: #1D2747; color-scheme: dark;
+    --bg: #1C1612; --surface: #261D17; --fg: #F1E8DA; --muted: #B9A794;
+    --line: #3D3127; --accent: #F0954A; --accent-soft: #3A2617; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0F1513; --surface: #161E1B; --fg: #E3EAE7; --muted: #9AA8A3;
-  --line: #2A3532; --accent: #8EA8FF; --accent-soft: #1D2747; color-scheme: dark;
+  --bg: #1C1612; --surface: #261D17; --fg: #F1E8DA; --muted: #B9A794;
+  --line: #3D3127; --accent: #F0954A; --accent-soft: #3A2617; color-scheme: dark;
 }
 * { box-sizing: border-box; }
 body {
