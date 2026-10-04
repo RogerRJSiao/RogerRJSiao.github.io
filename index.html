@@ -107,6 +107,8 @@ header { display: grid; gap: 20px; }
 .p-side h3 { font-size: 22px; font-weight: 900; line-height: 1.35; }
 .p-side .en { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--muted); }
 .stack { display: flex; flex-wrap: wrap; gap: 6px; }
+.p-link { font-size: 14px; font-weight: 500; text-decoration: none; justify-self: start; }
+.p-link:hover { text-decoration: underline; }
 .p-main { display: grid; gap: 18px; min-width: 0; }
 .flow {
   font-family: var(--font-mono); font-size: 13px; color: var(--muted);
@@ -234,6 +236,7 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12
         <h3>英文財報 × 繁體中文問答系統</h3>
         <span class="en">Financial RAG</span>
         <div class="stack"><span class="chip">Ollama</span><span class="chip">llama-3-taiwan-8b</span><span class="chip">bge-m3</span><span class="chip">ChromaDB</span><span class="chip">pdfplumber</span><span class="chip">FastAPI</span><span class="chip">Docker</span></div>
+        <a class="p-link" href="https://github.com/RogerRJSiao/my-genai/tree/main/financial_rag" target="_blank" rel="noopener">查看專案原始碼與文件 <span aria-hidden="true">↗</span></a>
       </div>
       <div class="p-main">
         <div class="flow">PDF 法說會 / 10-K HTML<i>→</i>表格解析 + metadata<i>→</i>bge-m3 向量化<i>→</i>ChromaDB 檢索<i>→</i>術語對照<i>→</i>繁中回答 + 引用</div>
@@ -262,6 +265,7 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12
         <h3>交通事故嚴重程度預測與高風險情境分析</h3>
         <span class="en">Traffic Accident ML</span>
         <div class="stack"><span class="chip">Python 3.12</span><span class="chip">pandas</span><span class="chip">scikit-learn</span><span class="chip">joblib</span><span class="chip">conda</span></div>
+        <a class="p-link" href="https://github.com/RogerRJSiao/ml/tree/main/traffic_accident_ml" target="_blank" rel="noopener">查看專案原始碼與文件 <span aria-hidden="true">↗</span></a>
       </div>
       <div class="p-main">
         <div class="flow">年度 zip<i>→</i>解壓 / 合併 / 清洗（sha256 紀錄）<i>→</i>分層切分 + 欠採樣<i>→</i>Logistic 迴歸<i>→</i>evaluate<i>→</i>promote 登錄版本</div>
@@ -297,6 +301,7 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12
         <h3>GitHub / GitLab 內容讀取工具</h3>
         <span class="en">my_git_mcp</span>
         <div class="stack"><span class="chip">MCP (FastMCP)</span><span class="chip">Flask</span><span class="chip">httpx</span><span class="chip">BeautifulSoup</span><span class="chip">GitLab API v4</span></div>
+        <a class="p-link" href="https://github.com/RogerRJSiao/my-genai/tree/main/my_git_mcp" target="_blank" rel="noopener">查看專案原始碼與文件 <span aria-hidden="true">↗</span></a>
       </div>
       <div class="p-main">
         <div class="flow">貼上連結<i>→</i>主機白名單檢查<i>→</i>GitHub REST / GitLab API<i>→</i>統一格式摘要卡片</div>
@@ -323,6 +328,7 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12
         <h3>台鐵時刻表查詢與山海線搭乘規劃</h3>
         <span class="en">n8n Railway Planner</span>
         <div class="stack"><span class="chip">n8n</span><span class="chip">Docker</span><span class="chip">JavaScript</span><span class="chip">Luxon</span><span class="chip">HTTP 爬蟲</span></div>
+        <a class="p-link" href="https://github.com/RogerRJSiao/rpa/tree/main/n8n/trc_transfer" target="_blank" rel="noopener">查看專案原始碼與文件 <span aria-hidden="true">↗</span></a>
       </div>
       <div class="p-main">
         <div class="flow">4 欄表單<i>→</i>3 站時刻表並聯爬取<i>→</i>Merge 同步<i>→</i>JS 解析與比對<i>→</i>直達 / 轉乘 2 份 CSV</div>
@@ -350,6 +356,7 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12
         <h3>專案進度填寫提醒與備份自動化</h3>
         <span class="en">Power Automate Flow</span>
         <div class="stack"><span class="chip">Power Automate</span><span class="chip">SharePoint</span><span class="chip">Excel</span><span class="chip">Outlook</span><span class="chip">Teams</span></div>
+        <a class="p-link" href="https://github.com/RogerRJSiao/rpa/tree/main/power_automate/mail_notification_excel_backup" target="_blank" rel="noopener">查看專案原始碼與文件 <span aria-hidden="true">↗</span></a>
       </div>
       <div class="p-main">
         <div class="flow">每日排程<i>→</i>讀取期限表<i>→</i>到期前 1–2 日寄提醒<i>→</i>到期日備份並押日期<i>→</i>撞名改發 Teams 通知</div>
@@ -377,6 +384,7 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12
         <h3>LabVIEW × C 語言條碼辨識</h3>
         <span class="en">LabC-Vision</span>
         <div class="stack"><span class="chip">LabVIEW 32-bit</span><span class="chip">C / DLL</span><span class="chip">zbar</span><span class="chip">stb_image</span><span class="chip">CMake + Ninja</span></div>
+        <a class="p-link" href="https://github.com/RogerRJSiao/LabC-Vision" target="_blank" rel="noopener">查看專案原始碼與文件 <span aria-hidden="true">↗</span></a>
       </div>
       <div class="p-main">
         <div class="flow">LabVIEW 選圖與條碼種類<i>→</i>CLFN 呼叫 DLL<i>→</i>detect 解碼<i>→</i>validate 驗證<i>→</i>HandleError.vi 顯示訊息</div>
@@ -403,6 +411,7 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12
         <h3>三角與非三角合併報表 v3.1</h3>
         <span class="en">Power BI DirectQuery</span>
         <div class="stack"><span class="chip">Power BI</span><span class="chip">Power Query M</span><span class="chip">PostgreSQL</span><span class="chip">CHANGELOG</span></div>
+        <a class="p-link" href="https://github.com/RogerRJSiao/BI/blob/main/BI_design/README_sales.md" target="_blank" rel="noopener">查看專案原始碼與文件 <span aria-hidden="true">↗</span></a>
       </div>
       <div class="p-main">
         <div class="flow">年月 / 公司別參數<i>→</i>組成 SQL WHERE<i>→</i>資料庫端篩選<i>→</i>full 47 欄 / finance 27 欄</div>
@@ -429,6 +438,7 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12
         <h3>家庭共帳 Power BI 報表</h3>
         <span class="en">family_finance.pbix</span>
         <div class="stack"><span class="chip">Power BI</span><span class="chip">Power Query M</span><span class="chip">DAX</span><span class="chip">星狀綱要</span></div>
+        <a class="p-link" href="https://github.com/RogerRJSiao/BI/blob/main/BI_design/README_finance.md" target="_blank" rel="noopener">查看專案原始碼與文件 <span aria-hidden="true">↗</span></a>
       </div>
       <div class="p-main">
         <div class="flow">fact_accounts/*.xlsx<i>→</i>Folder.Files 自動合併<i>→</i>事實表<i>→</i>DAX 日期 / 年月 / 個帳維度<i>→</i>月表報表</div>
@@ -454,6 +464,7 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12
         <h3>AI 技能庫</h3>
         <span class="en">My AI Skills Hub</span>
         <div class="stack"><span class="chip">Claude Skills</span><span class="chip">Claude Code</span><span class="chip">Python</span><span class="chip">Excel</span></div>
+        <a class="p-link" href="https://github.com/RogerRJSiao/my-ai-skills" target="_blank" rel="noopener">查看專案原始碼與文件 <span aria-hidden="true">↗</span></a>
       </div>
       <div class="p-main">
         <div class="flow">SKILL.md 工作流<i>+</i>references 規則<i>+</i>assets 範本<i>+</i>scripts 工具<i>→</i>AI 依流程產出</div>
@@ -482,7 +493,7 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12
   <div class="sec-head"><h2 id="teach-h">教學與分享</h2></div>
   <div class="skills">
     <div class="skill-row">
-      <h3>BI 資料建模教育訓練</h3>
+      <h3><a href="https://github.com/RogerRJSiao/BI/blob/main/BI_design/README_BI_modeling.md" target="_blank" rel="noopener">BI 資料建模教育訓練 <span aria-hidden="true">↗</span></a></h3>
       <p>整理 12 門商業智慧課程，從 Power BI Desktop、Power Query 操作、資料建模概念，一路到 DAX 量值與時間智慧函數，依入門、初階、進階規劃學習路徑。</p>
       <div class="where">12 門課程</div>
     </div>
