@@ -23,6 +23,11 @@ img { max-width: 100%; }
   --line: #E5D8C3;
   --accent: #A84A0C;
   --accent-soft: #F5E3CF;
+  --clay-bg: #F6DDD2; --clay-fg: #8A3A1E;
+  --moss-bg: #E1E9D2; --moss-fg: #46591F;
+  --heather-bg: #ECDDE6; --heather-fg: #6E3858;
+  --ochre-bg: #F3E6C4; --ochre-fg: #6F520E;
+  --lake-bg: #DCE7EC; --lake-fg: #2C5566;
   --font-display: "Bricolage Grotesque", "Noto Sans TC", system-ui, sans-serif;
   --font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
@@ -31,11 +36,17 @@ img { max-width: 100%; }
   :root:not([data-theme="light"]) {
     --bg: #1C1612; --surface: #261D17; --fg: #F1E8DA; --muted: #B9A794;
     --line: #3D3127; --accent: #F0954A; --accent-soft: #3A2617; color-scheme: dark;
+    --clay-bg: #3D2219; --clay-fg: #F2B8A0; --moss-bg: #29321A; --moss-fg: #C3D69B;
+    --heather-bg: #35222E; --heather-fg: #E3B8D2; --ochre-bg: #372C12; --ochre-fg: #E9CD82;
+    --lake-bg: #1B2D35; --lake-fg: #A9CFDF;
   }
 }
 :root[data-theme="dark"] {
   --bg: #1C1612; --surface: #261D17; --fg: #F1E8DA; --muted: #B9A794;
   --line: #3D3127; --accent: #F0954A; --accent-soft: #3A2617; color-scheme: dark;
+  --clay-bg: #3D2219; --clay-fg: #F2B8A0; --moss-bg: #29321A; --moss-fg: #C3D69B;
+  --heather-bg: #35222E; --heather-fg: #E3B8D2; --ochre-bg: #372C12; --ochre-fg: #E9CD82;
+  --lake-bg: #1B2D35; --lake-fg: #A9CFDF;
 }
 * { box-sizing: border-box; }
 body {
@@ -83,6 +94,13 @@ header { display: grid; gap: 20px; }
   padding: 3px 9px; border-radius: 4px; background: var(--surface);
   border: 1px solid var(--line); white-space: nowrap;
 }
+/* Skill map chips: one natural hue per domain */
+.skill-row[data-hue] .chip { background: var(--hue-bg); color: var(--hue-fg); border-color: transparent; }
+.skill-row[data-hue="clay"]    { --hue-bg: var(--clay-bg);    --hue-fg: var(--clay-fg); }
+.skill-row[data-hue="moss"]    { --hue-bg: var(--moss-bg);    --hue-fg: var(--moss-fg); }
+.skill-row[data-hue="heather"] { --hue-bg: var(--heather-bg); --hue-fg: var(--heather-fg); }
+.skill-row[data-hue="ochre"]   { --hue-bg: var(--ochre-bg);   --hue-fg: var(--ochre-fg); }
+.skill-row[data-hue="lake"]    { --hue-bg: var(--lake-bg);    --hue-fg: var(--lake-fg); }
 
 /* Principles */
 .principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
@@ -170,27 +188,27 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12
 <section aria-labelledby="skills-h">
   <div class="sec-head"><h2 id="skills-h">技能地圖</h2><span class="label">領域 · 工具 · 對應專案</span></div>
   <div class="skills">
-    <div class="skill-row">
+    <div class="skill-row" data-hue="clay">
       <h3>資料視覺化與 BI</h3>
       <div class="tools"><span class="chip">Power BI</span><span class="chip">Power Query M</span><span class="chip">DAX</span><span class="chip">PostgreSQL DirectQuery</span><span class="chip">星狀綱要</span><span class="chip">查詢下推</span></div>
       <div class="where">三角合併 · 家庭共帳</div>
     </div>
-    <div class="skill-row">
+    <div class="skill-row" data-hue="moss">
       <h3>流程自動化 RPA</h3>
       <div class="tools"><span class="chip">Power Automate</span><span class="chip">n8n</span><span class="chip">SharePoint</span><span class="chip">Outlook / Teams</span><span class="chip">網頁爬蟲</span><span class="chip">JavaScript</span></div>
       <div class="where">進度提醒 · 台鐵時刻</div>
     </div>
-    <div class="skill-row">
+    <div class="skill-row" data-hue="heather">
       <h3>生成式 AI 應用</h3>
       <div class="tools"><span class="chip">RAG</span><span class="chip">Ollama</span><span class="chip">ChromaDB</span><span class="chip">MCP Server</span><span class="chip">Claude Skills</span><span class="chip">Prompt 設計</span></div>
       <div class="where">財報 RAG · MCP · Skills</div>
     </div>
-    <div class="skill-row">
+    <div class="skill-row" data-hue="ochre">
       <h3>機器學習</h3>
       <div class="tools"><span class="chip">scikit-learn</span><span class="chip">pandas</span><span class="chip">Logistic 迴歸</span><span class="chip">勝算比解讀</span><span class="chip">不平衡資料評估</span></div>
       <div class="where">交通事故</div>
     </div>
-    <div class="skill-row">
+    <div class="skill-row" data-hue="lake">
       <h3>軟體與系統整合</h3>
       <div class="tools"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">Flask</span><span class="chip">Docker</span><span class="chip">C / DLL</span><span class="chip">LabVIEW</span><span class="chip">CMake</span></div>
       <div class="where">LabC-Vision · 財報 RAG</div>
