@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Roger RJ Siao 的 9 個 side project，涵蓋 Power BI、RPA、RAG、MCP、機器學習與 LabVIEW/C 整合。">
+<title>Roger RJ Siao 作品集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<style>
+/* Base reset */
+:root { color-scheme: light; }
+body { margin: 0; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+/* Layout: one column, header → 技能地圖表 → 工作原則 → 專案逐列（左：名稱與技術，右：痛點／做法／成果） */
+:root {
+  --bg: #F2F4F3;
+  --surface: #FFFFFF;
+  --fg: #15201D;
+  --muted: #56635F;
+  --line: #D5DCD9;
+  --accent: #2346C4;
+  --accent-soft: #E3E8FA;
+  --font-display: "Bricolage Grotesque", "Noto Sans TC", system-ui, sans-serif;
+  --font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F1513; --surface: #161E1B; --fg: #E3EAE7; --muted: #9AA8A3;
+    --line: #2A3532; --accent: #8EA8FF; --accent-soft: #1D2747; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F1513; --surface: #161E1B; --fg: #E3EAE7; --muted: #9AA8A3;
+  --line: #2A3532; --accent: #8EA8FF; --accent-soft: #1D2747; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.75;
+  padding: 0 20px;
+}
+.wrap { max-width: 1080px; margin: 0 auto; padding-block: 56px 80px; display: grid; gap: 72px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.label {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted);
+}
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* Header */
+header { display: grid; gap: 20px; }
+.name {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(44px, 8vw, 88px); line-height: .95; letter-spacing: -.02em;
+}
+.name span { color: var(--accent); }
+.role { font-weight: 700; font-size: clamp(17px, 2vw, 20px); letter-spacing: .04em; }
+.role span { color: var(--accent); padding: 0 .3em; }
+.lede { font-size: clamp(18px, 2.2vw, 22px); font-weight: 500; max-width: 34em; }
+.intro { color: var(--muted); max-width: 40em; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 24px; font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+.meta b { color: var(--fg); font-weight: 600; }
+
+/* Section heads */
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-bottom: 2px solid var(--fg); padding-bottom: 10px; margin-bottom: 8px; }
+.sec-head h2 { font-size: 24px; font-weight: 900; }
+
+/* Skill map */
+.skills { display: grid; }
+.skill-row { display: grid; grid-template-columns: 200px 1fr 120px; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.skill-row h3 { font-size: 17px; font-weight: 700; }
+.skill-row .tools { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
+.skill-row .where { font-family: var(--font-mono); font-size: 12px; color: var(--muted); text-align: right; }
+.chip {
+  font-family: var(--font-mono); font-size: 12.5px; line-height: 1.4;
+  padding: 3px 9px; border-radius: 4px; background: var(--surface);
+  border: 1px solid var(--line); white-space: nowrap;
+}
+
+/* Principles */
+.principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.principle { background: var(--accent-soft); border-radius: 6px; padding: 20px; display: grid; gap: 12px; align-content: space-between; }
+.principle p { font-weight: 700; font-size: 17px; line-height: 1.55; }
+.principle .label { text-transform: none; letter-spacing: 0; }
+
+/* Filters */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.filters button {
+  font: 500 14px/1 var(--font-body); color: var(--fg); background: transparent;
+  border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer;
+}
+.filters button:hover { border-color: var(--fg); }
+.filters button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+
+/* Projects */
+.projects { display: grid; }
+.project { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 32px; padding: 36px 0; border-bottom: 1px solid var(--line); }
+.p-side { display: grid; gap: 14px; align-content: start; min-width: 0; }
+.p-cat { font-family: var(--font-mono); font-size: 12px; color: var(--accent); letter-spacing: .06em; }
+.p-side h3 { font-size: 22px; font-weight: 900; line-height: 1.35; }
+.p-side .en { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--muted); }
+.stack { display: flex; flex-wrap: wrap; gap: 6px; }
+.p-main { display: grid; gap: 18px; min-width: 0; }
+.flow {
+  font-family: var(--font-mono); font-size: 13px; color: var(--muted);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 6px;
+  padding: 10px 14px; overflow-x: auto; white-space: nowrap;
+}
+.flow i { font-style: normal; color: var(--accent); padding: 0 6px; }
+dl { margin: 0; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 10px 16px; }
+dt { font-weight: 700; font-size: 14px; color: var(--muted); padding-top: 2px; }
+dd { margin: 0; min-width: 0; }
+dd ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
+.results { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.stat { border-top: 2px solid var(--accent); padding-top: 8px; display: grid; gap: 2px; }
+.stat .v { font-family: var(--font-mono); font-weight: 600; font-size: 20px; font-variant-numeric: tabular-nums; line-height: 1.3; }
+.stat .k { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.odds { display: grid; gap: 6px; font-size: 14px; }
+.odds-row { display: grid; grid-template-columns: 9em minmax(0, 1fr) 3.5em; gap: 10px; align-items: center; }
+.odds-bar { height: 10px; background: var(--line); border-radius: 2px; position: relative; overflow: hidden; }
+.odds-bar span { position: absolute; inset: 0 auto 0 0; background: var(--accent); }
+.odds-row .mono { text-align: right; }
+.empty { padding: 36px 0; color: var(--muted); }
+
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 14px; border-top: 2px solid var(--fg); padding-top: 16px; }
+
+@media (max-width: 820px) {
+  .skill-row { grid-template-columns: 1fr; gap: 8px; }
+  .skill-row .where { text-align: left; }
+  .principles { grid-template-columns: 1fr; }
+  .project { grid-template-columns: 1fr; gap: 20px; }
+}
+@media (max-width: 460px) {
+  dl { grid-template-columns: 1fr; gap: 4px; }
+  dd { margin-bottom: 8px; }
+  .odds-row { grid-template-columns: 7em minmax(0, 1fr) 3em; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .project { transition: opacity .2s; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+  <div class="label">數位工具作品集 · 2026</div>
+  <h1 class="name">Roger<br>RJ <span>Siao</span></h1>
+  <p class="role">軟體工程師 <span aria-hidden="true">／</span> 數位轉型推廣專員</p>
+  <p class="lede">我把重複的手工作業，做成可以重跑、可以追溯的資料流程。</p>
+  <p class="intro">這裡收錄 9 個 side project，橫跨 Power BI 報表、Power Automate 與 n8n 流程自動化、本機 LLM 的 RAG 問答、機器學習，以及 LabVIEW 與 C 語言的影像辨識整合。每個專案都從一個具體的工作痛點出發，並留有完整的說明文件與版本紀錄。</p>
+  <div class="meta">
+    <span><b>9</b> 個專案</span>
+    <span><b>5</b> 個技術領域</span>
+    <span>GitHub <a href="https://github.com/RogerRJSiao">@RogerRJSiao</a></span>
+    <span>LinkedIn <a href="https://www.linkedin.com/in/rogersiaojian">linkedin.com/in/rogersiaojian</a></span>
+  </div>
+</header>
+
+<section aria-labelledby="skills-h">
+  <div class="sec-head"><h2 id="skills-h">技能地圖</h2><span class="label">領域 · 工具 · 對應專案</span></div>
+  <div class="skills">
+    <div class="skill-row">
+      <h3>資料視覺化與 BI</h3>
+      <div class="tools"><span class="chip">Power BI</span><span class="chip">Power Query M</span><span class="chip">DAX</span><span class="chip">PostgreSQL DirectQuery</span><span class="chip">星狀綱要</span><span class="chip">查詢下推</span></div>
+      <div class="where">三角合併 · 家庭共帳</div>
+    </div>
+    <div class="skill-row">
+      <h3>流程自動化 RPA</h3>
+      <div class="tools"><span class="chip">Power Automate</span><span class="chip">n8n</span><span class="chip">SharePoint</span><span class="chip">Outlook / Teams</span><span class="chip">網頁爬蟲</span><span class="chip">JavaScript</span></div>
+      <div class="where">進度提醒 · 台鐵時刻</div>
+    </div>
+    <div class="skill-row">
+      <h3>生成式 AI 應用</h3>
+      <div class="tools"><span class="chip">RAG</span><span class="chip">Ollama</span><span class="chip">ChromaDB</span><span class="chip">MCP Server</span><span class="chip">Claude Skills</span><span class="chip">Prompt 設計</span></div>
+      <div class="where">財報 RAG · MCP · Skills</div>
+    </div>
+    <div class="skill-row">
+      <h3>機器學習</h3>
+      <div class="tools"><span class="chip">scikit-learn</span><span class="chip">pandas</span><span class="chip">Logistic 迴歸</span><span class="chip">勝算比解讀</span><span class="chip">不平衡資料評估</span></div>
+      <div class="where">交通事故</div>
+    </div>
+    <div class="skill-row">
+      <h3>軟體與系統整合</h3>
+      <div class="tools"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">Flask</span><span class="chip">Docker</span><span class="chip">C / DLL</span><span class="chip">LabVIEW</span><span class="chip">CMake</span></div>
+      <div class="where">LabC-Vision · 財報 RAG</div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="principles-h">
+  <div class="sec-head"><h2 id="principles-h">從專案裡學到的事</h2><span class="label">摘自各專案文件</span></div>
+  <div class="principles">
+    <div class="principle">
+      <p>能用程式確定的事，就不要交給 LLM。</p>
+      <span class="label">Financial RAG：引用來源、財季過濾改由程式處理</span>
+    </div>
+    <div class="principle">
+      <p>資料 pipeline 要能重跑、能略過、能驗證。</p>
+      <span class="label">交通事故 ML：sha256 紀錄與列數等式</span>
+    </div>
+    <div class="principle">
+      <p>篩選交給資料庫先做，不要整張表撈回來再處理。</p>
+      <span class="label">Power BI v3.1：WHERE 子句下推解決逾時</span>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="projects-h">
+  <div class="sec-head"><h2 id="projects-h">專案</h2>
+    <div class="filters" role="group" aria-label="依領域篩選">
+      <button type="button" id="f-all" data-filter="all" aria-pressed="true">全部</button>
+      <button type="button" id="f-ai" data-filter="ai" aria-pressed="false">生成式 AI</button>
+      <button type="button" id="f-ml" data-filter="ml" aria-pressed="false">機器學習</button>
+      <button type="button" id="f-rpa" data-filter="rpa" aria-pressed="false">RPA</button>
+      <button type="button" id="f-bi" data-filter="bi" aria-pressed="false">BI</button>
+      <button type="button" id="f-sys" data-filter="sys" aria-pressed="false">系統整合</button>
+    </div>
+  </div>
+
+  <div class="projects">
+
+    <article class="project" data-cat="ai">
+      <div class="p-side">
+        <span class="p-cat">生成式 AI · RAG</span>
+        <h3>英文財報 × 繁體中文問答系統</h3>
+        <span class="en">Financial RAG</span>
+        <div class="stack"><span class="chip">Ollama</span><span class="chip">llama-3-taiwan-8b</span><span class="chip">bge-m3</span><span class="chip">ChromaDB</span><span class="chip">pdfplumber</span><span class="chip">FastAPI</span><span class="chip">Docker</span></div>
+      </div>
+      <div class="p-main">
+        <div class="flow">PDF 法說會 / 10-K HTML<i>→</i>表格解析 + metadata<i>→</i>bge-m3 向量化<i>→</i>ChromaDB 檢索<i>→</i>術語對照<i>→</i>繁中回答 + 引用</div>
+        <dl>
+          <dt>痛點</dt>
+          <dd>美光、南亞科、華邦電的財報都是英文，中文術語和英文欄名對不上；美股與台股財年差一季，人工對照容易拿錯期別；通用 LLM 會編造數字，財報也不適合上傳外部服務。</dd>
+          <dt>做法</dt>
+          <dd><ul>
+            <li>完全在本機執行的 RAG：解析 PDF 與 10-K 表格，處理多層表頭、假表格、頁尾雜訊。</li>
+            <li>依公司、財年、財季、報表建立 metadata 過濾，「最新一季」由程式判斷，不靠語意猜。</li>
+            <li>用財會、半導體中英詞彙表橋接提問與英文欄名；引用來源由系統產生，不交給 LLM 抄寫。</li>
+            <li>FastAPI 封裝成服務，Docker 容器化部署，GPU 推論沿用主機 Ollama。</li>
+          </ul></dd>
+        </dl>
+        <div class="results">
+          <div class="stat"><span class="v">2,476</span><span class="k">向量 chunk，來自 25 份文件</span></div>
+          <div class="stat"><span class="v">3 家</span><span class="k">橫跨美股、台股的記憶體大廠</span></div>
+          <div class="stat"><span class="v">$13,339M</span><span class="k">美光 FY2025 資本公積，與人工核對一致</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project" data-cat="ml">
+      <div class="p-side">
+        <span class="p-cat">機器學習 · 可解釋模型</span>
+        <h3>交通事故嚴重程度預測與高風險情境分析</h3>
+        <span class="en">Traffic Accident ML</span>
+        <div class="stack"><span class="chip">Python 3.12</span><span class="chip">pandas</span><span class="chip">scikit-learn</span><span class="chip">joblib</span><span class="chip">conda</span></div>
+      </div>
+      <div class="p-main">
+        <div class="flow">年度 zip<i>→</i>解壓 / 合併 / 清洗（sha256 紀錄）<i>→</i>分層切分 + 欠採樣<i>→</i>Logistic 迴歸<i>→</i>evaluate<i>→</i>promote 登錄版本</div>
+        <dl>
+          <dt>痛點</dt>
+          <dd>政府公開資料逐年分檔發布，每列是一位當事者而非一件事故；死亡事故（A1）只占約 0.5%，全部猜「受傷」就有 99.5% 準確率。</dd>
+          <dt>做法</dt>
+          <dd><ul>
+            <li>三支程式處理資料，以 sha256 記錄狀態避免重複處理，並用列數等式驗證清洗沒有遺漏。</li>
+            <li>Logistic 迴歸換算勝算比，直接回答「哪些情境讓死亡事故的勝算變高」。</li>
+            <li>評估改看 PR-AUC、recall、F2；切點由 validate 決定，test 只在版本定案後用一次。</li>
+          </ul></dd>
+        </dl>
+        <div class="results">
+          <div class="stat"><span class="v">約 7 倍</span><span class="k">死亡事故只占 0.5%，模型找出它們的能力約為隨機的 7 倍（PR-AUC 0.0351 vs. 0.0049）</span></div>
+          <div class="stat"><span class="v">0.789</span><span class="k">test ROC-AUC</span></div>
+          <div class="stat"><span class="v">差額 0</span><span class="k">2020–2022 年清洗列數驗證</span></div>
+        </div>
+        <div class="odds" aria-label="發生死亡事故的勝算比前五名">
+          <span class="label">勝算比前五名（相對於參考類別）</span>
+          <div class="odds-row"><span>人與車事故</span><div class="odds-bar"><span style="width:88.2%"></span></div><span class="mono">4.41×</span></div>
+          <div class="odds-row"><span>省道</span><div class="odds-bar"><span style="width:82.4%"></span></div><span class="mono">4.12×</span></div>
+          <div class="odds-row"><span>對撞</span><div class="odds-bar"><span style="width:72.8%"></span></div><span class="mono">3.64×</span></div>
+          <div class="odds-row"><span>撞固定物</span><div class="odds-bar"><span style="width:56%"></span></div><span class="mono">2.80×</span></div>
+          <div class="odds-row"><span>清晨時段</span><div class="odds-bar"><span style="width:50.6%"></span></div><span class="mono">2.53×</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project" data-cat="ai">
+      <div class="p-side">
+        <span class="p-cat">生成式 AI · MCP</span>
+        <h3>GitHub / GitLab 內容讀取工具</h3>
+        <span class="en">my_git_mcp</span>
+        <div class="stack"><span class="chip">MCP (FastMCP)</span><span class="chip">Flask</span><span class="chip">httpx</span><span class="chip">BeautifulSoup</span><span class="chip">GitLab API v4</span></div>
+      </div>
+      <div class="p-main">
+        <div class="flow">貼上連結<i>→</i>主機白名單檢查<i>→</i>GitHub REST / GitLab API<i>→</i>統一格式摘要卡片</div>
+        <dl>
+          <dt>痛點</dt>
+          <dd>公司自架的 GitLab 在內網、需要 token，一般工具讀不到；issue / MR 的狀態、標籤、指派人散落各處，GitHub 和 GitLab 的欄位也不同。</dd>
+          <dt>做法</dt>
+          <dd><ul>
+            <li>自建 MCP server，讓 Claude 在對話中直接讀取 Git 平台網頁與原始檔。</li>
+            <li>Flask 網頁呼叫官方 API，把 PR 與 MR 整理成同一種摘要格式。</li>
+            <li>主機白名單防範 SSRF，token 一律由環境變數讀取，支援多台自架 GitLab。</li>
+          </ul></dd>
+        </dl>
+        <div class="results">
+          <div class="stat"><span class="v">2 種入口</span><span class="k">MCP 對話工具、Flask 網頁</span></div>
+          <div class="stat"><span class="v">4 類連結</span><span class="k">GitHub Issue / PR、GitLab Issue / MR</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project" data-cat="rpa">
+      <div class="p-side">
+        <span class="p-cat">RPA · n8n</span>
+        <h3>台鐵時刻表查詢與山海線搭乘規劃</h3>
+        <span class="en">n8n Railway Planner</span>
+        <div class="stack"><span class="chip">n8n</span><span class="chip">Docker</span><span class="chip">JavaScript</span><span class="chip">Luxon</span><span class="chip">HTTP 爬蟲</span></div>
+      </div>
+      <div class="p-main">
+        <div class="flow">4 欄表單<i>→</i>3 站時刻表並聯爬取<i>→</i>Merge 同步<i>→</i>JS 解析與比對<i>→</i>直達 / 轉乘 2 份 CSV</div>
+        <dl>
+          <dt>痛點</dt>
+          <dd>台鐵官網的轉乘查詢只列出部分媒合班次，結果無法下載，表單多達 10 個欄位；山海線列車在途中還會改變順逆行方向。</dd>
+          <dt>做法</dt>
+          <dd><ul>
+            <li>n8n 以 Docker 地端部署，3 個 HTTP 節點並聯爬取，用 Merge 等待全部到齊再比對。</li>
+            <li>發現車站編號無法判斷山海線方向，改為自建「行車方向參照表」。</li>
+            <li>凌晨班次改寫為 24:xx，確保跨午夜排序正確。</li>
+          </ul></dd>
+        </dl>
+        <div class="results">
+          <div class="stat"><span class="v">10 → 4</span><span class="k">查詢輸入欄位</span></div>
+          <div class="stat"><span class="v">5–10 秒</span><span class="k">產出直達與轉乘兩份 CSV</span></div>
+          <div class="stat"><span class="v">9 / 75</span><span class="k">起站 75 班中篩出的直達車</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project" data-cat="rpa">
+      <div class="p-side">
+        <span class="p-cat">RPA · Microsoft 365</span>
+        <h3>專案進度填寫提醒與備份自動化</h3>
+        <span class="en">Power Automate Flow</span>
+        <div class="stack"><span class="chip">Power Automate</span><span class="chip">SharePoint</span><span class="chip">Excel</span><span class="chip">Outlook</span><span class="chip">Teams</span></div>
+      </div>
+      <div class="p-main">
+        <div class="flow">每日排程<i>→</i>讀取期限表<i>→</i>到期前 1–2 日寄提醒<i>→</i>到期日備份並押日期<i>→</i>撞名改發 Teams 通知</div>
+        <dl>
+          <dt>痛點</dt>
+          <dd>部門進度表靠人工提醒，容易遺漏；檔案持續被覆寫，沒有手動另存就無法回溯各期內容。</dd>
+          <dt>做法</dt>
+          <dd><ul>
+            <li>雲端 Flow 每日讀取 SharePoint 上的期限清單，提醒信附上檔案連結與填報規範。</li>
+            <li>到期日自動複製進度檔；同名檔案已存在時跳過，改以 Teams 私訊通知。</li>
+            <li>整理 7 個平台限制與繞道方式，例如日期字串需以 <span class="mono">tick()</span> 轉數值比較。</li>
+          </ul></dd>
+        </dl>
+        <div class="results">
+          <div class="stat"><span class="v">≈365 次</span><span class="k">每年自動執行</span></div>
+          <div class="stat"><span class="v">≈156 人次</span><span class="k">每年自動提醒</span></div>
+          <div class="stat"><span class="v">≈26 份</span><span class="k">每年自動備份</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project" data-cat="sys">
+      <div class="p-side">
+        <span class="p-cat">系統整合 · 影像辨識</span>
+        <h3>LabVIEW × C 語言條碼辨識</h3>
+        <span class="en">LabC-Vision</span>
+        <div class="stack"><span class="chip">LabVIEW 32-bit</span><span class="chip">C / DLL</span><span class="chip">zbar</span><span class="chip">stb_image</span><span class="chip">CMake + Ninja</span></div>
+      </div>
+      <div class="p-main">
+        <div class="flow">LabVIEW 選圖與條碼種類<i>→</i>CLFN 呼叫 DLL<i>→</i>detect 解碼<i>→</i>validate 驗證<i>→</i>HandleError.vi 顯示訊息</div>
+        <dl>
+          <dt>痛點</dt>
+          <dd>產線檢測的判斷邏輯寫在 LabVIEW 方塊圖裡，難閱讀、難做單元測試，不同產線還要各複製一份；操作人員只看得到數字錯誤碼。</dd>
+          <dt>做法</dt>
+          <dd><ul>
+            <li>判斷邏輯移到 C，編成 32 位元 DLL；LabVIEW 只負責畫面與呼叫。</li>
+            <li>讀檔偵測與編碼驗證分兩階段回報，操作人員能看出問題出在哪一段。</li>
+            <li>錯誤碼依模組分段（<span class="mono">-8000</span> 到 <span class="mono">-8900</span>），訊息對照表只有一份。</li>
+          </ul></dd>
+        </dl>
+        <div class="results">
+          <div class="stat"><span class="v">4 種條碼</span><span class="k">EAN-8 / 13、UPC-A、手機條碼載具</span></div>
+          <div class="stat"><span class="v">1 個指令</span><span class="k">CMake 建置全部模組並跑單元測試</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project" data-cat="bi">
+      <div class="p-side">
+        <span class="p-cat">BI · 效能改善</span>
+        <h3>三角與非三角合併報表 v3.1</h3>
+        <span class="en">Power BI DirectQuery</span>
+        <div class="stack"><span class="chip">Power BI</span><span class="chip">Power Query M</span><span class="chip">PostgreSQL</span><span class="chip">CHANGELOG</span></div>
+      </div>
+      <div class="p-main">
+        <div class="flow">年月 / 公司別參數<i>→</i>組成 SQL WHERE<i>→</i>資料庫端篩選<i>→</i>full 47 欄 / finance 27 欄</div>
+        <dl>
+          <dt>痛點</dt>
+          <dd>財務報表的 SQL 沒帶篩選條件，每次重新整理都撈回全部年月、全部子公司，最後出現 <span class="mono">57014 statement timeout</span>，報表更新失敗。</dd>
+          <dt>做法</dt>
+          <dd><ul>
+            <li>把篩選參數組成 WHERE 子句下推到資料庫，讓索引在源頭先篩。</li>
+            <li>依部門需求分出完整版與財務版，未用欄位以註解保留、可隨時復原。</li>
+            <li>制定 <span class="mono">v{主}.{次}_{模式}.pbix</span> 命名規則與共用 CHANGELOG。</li>
+          </ul></dd>
+        </dl>
+        <div class="results">
+          <div class="stat"><span class="v">47 → 27 欄</span><span class="k">財務單位專用版本</span></div>
+          <div class="stat"><span class="v">全表 → 篩選</span><span class="k">查詢改為源頭篩選</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project" data-cat="bi">
+      <div class="p-side">
+        <span class="p-cat">BI · 資料建模</span>
+        <h3>家庭共帳 Power BI 報表</h3>
+        <span class="en">family_finance.pbix</span>
+        <div class="stack"><span class="chip">Power BI</span><span class="chip">Power Query M</span><span class="chip">DAX</span><span class="chip">星狀綱要</span></div>
+      </div>
+      <div class="p-main">
+        <div class="flow">fact_accounts/*.xlsx<i>→</i>Folder.Files 自動合併<i>→</i>事實表<i>→</i>DAX 日期 / 年月 / 個帳維度<i>→</i>月表報表</div>
+        <dl>
+          <dt>痛點</dt>
+          <dd>每年一份記帳 Excel，若每年手動合併，查詢就要跟著改。</dd>
+          <dt>做法</dt>
+          <dd><ul>
+            <li>「分類維度 + 明細事實」架構，分類採會計科目式層級編碼（A01、B02）。</li>
+            <li>M 查詢自動排除隱藏檔、暫存鎖定檔與子資料夾，路徑以參數管理。</li>
+            <li>收支分類換成料、工、費，即可作為製造業成本報表的骨架。</li>
+          </ul></dd>
+        </dl>
+        <div class="results">
+          <div class="stat"><span class="v">0 行修改</span><span class="k">新增年度只需放入新檔案</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project" data-cat="ai">
+      <div class="p-side">
+        <span class="p-cat">生成式 AI · Claude Skills</span>
+        <h3>AI 技能庫</h3>
+        <span class="en">My AI Skills Hub</span>
+        <div class="stack"><span class="chip">Claude Skills</span><span class="chip">Claude Code</span><span class="chip">Python</span><span class="chip">Excel</span></div>
+      </div>
+      <div class="p-main">
+        <div class="flow">SKILL.md 工作流<i>+</i>references 規則<i>+</i>assets 範本<i>+</i>scripts 工具<i>→</i>AI 依流程產出</div>
+        <dl>
+          <dt>痛點</dt>
+          <dd>重複性的文書與評分工作，每次交給 AI 都要重新說明規則，結果格式也不一致。</dd>
+          <dt>做法</dt>
+          <dd><ul>
+            <li>信用卡優惠 PDF 整理成統一格式的 Excel。</li>
+            <li>Power BI 版號判斷、檔名規則與 CHANGELOG 維護。</li>
+            <li>把技術素材改寫成主管看得懂的四段式改善提案。</li>
+            <li>Excel 實作課程評分：批改 4 大題 18 小項並寫入結果活頁簿。</li>
+          </ul></dd>
+        </dl>
+        <div class="results">
+          <div class="stat"><span class="v">4 個 Skill</span><span class="k">皆可在 Claude.ai 與 Claude Code 使用</span></div>
+        </div>
+      </div>
+    </article>
+
+    <p class="empty" id="empty" hidden>這個領域目前沒有專案。</p>
+  </div>
+</section>
+
+<section aria-labelledby="teach-h">
+  <div class="sec-head"><h2 id="teach-h">教學與分享</h2></div>
+  <div class="skills">
+    <div class="skill-row">
+      <h3>BI 資料建模教育訓練</h3>
+      <p>整理 12 門商業智慧課程，從 Power BI Desktop、Power Query 操作、資料建模概念，一路到 DAX 量值與時間智慧函數，依入門、初階、進階規劃學習路徑。</p>
+      <div class="where">12 門課程</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Roger RJ Siao · <a href="https://github.com/RogerRJSiao">github.com/RogerRJSiao</a> · <a href="https://www.linkedin.com/in/rogersiaojian">linkedin.com/in/rogersiaojian</a></span>
+  <span class="mono">每個專案都附有完整 README、流程圖與問題排解紀錄</span>
+</footer>
+
+</div>
+
+<script>
+(function () {
+  var buttons = document.querySelectorAll('.filters button');
+  var projects = document.querySelectorAll('.project');
+  var empty = document.getElementById('empty');
+  function apply(cat) {
+    var shown = 0;
+    projects.forEach(function (p) {
+      var on = cat === 'all' || p.dataset.cat === cat;
+      p.hidden = !on;
+      if (on) shown++;
+    });
+    empty.hidden = shown > 0;
+    buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.filter === cat)); });
+    try { localStorage.setItem('portfolio-filter', cat); } catch (e) {}
+  }
+  buttons.forEach(function (b) { b.addEventListener('click', function () { apply(b.dataset.filter); }); });
+  try {
+    var saved = localStorage.getItem('portfolio-filter');
+    if (saved && document.querySelector('.filters button[data-filter="' + saved + '"]')) apply(saved);
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
